@@ -8,14 +8,6 @@ services:
   redis:
     image: redis:latest
     restart: unless-stopped
-  mongo-express:
-    image: mongo-express:latest
-    ports:
-      - 8081:8081
-    environment:
-      - ME_CONFIG_MONGODB_SERVER=mongodb
-    depends_on:
-      - mongodb
 
   dns-server:
     build:
@@ -24,9 +16,14 @@ services:
     ports:
       - 53:53/udp
       - 53:53/tcp
+      # Dashboard is published on loopback only, it has no authentication
+      - 127.0.0.1:8053:8053
     environment:
       - REDIS_HOST=redis
       - MONGO_DB_URL=mongodb://mongodb:27017/dns
+      - DASHBOARD_PORT=8053
+      # Must bind all interfaces inside the container for the mapping above to work
+      - DASHBOARD_HOST=0.0.0.0
     depends_on:
       - mongodb
       - redis

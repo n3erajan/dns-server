@@ -1,0 +1,176 @@
+<mxfile host="Electron">
+  <diagram id="dnsServerArchitecture" name="pageWithNumber"><mxGraphModel dx="0" dy="0" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="0" page="0" pageScale="1" pageWidth="900" pageHeight="1210" math="0" shadow="0" adaptiveColors="auto">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+    <mxCell id="title" parent="1" vertex="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=25;fontStyle=1;fontColor=#0F172A;" value="Custom DNS server architecture">
+      <mxGeometry x="52" y="22" width="620" height="34" as="geometry" />
+    </mxCell>
+    <mxCell id="subtitle" parent="1" vertex="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=13;fontColor=#64748B;" value="A query is answered by the first layer that matches: blocklist, Redis cache, MongoDB records, then upstream DNS">
+      <mxGeometry x="52" y="58" width="796" height="22" as="geometry" />
+    </mxCell>
+    <mxCell id="process" parent="1" vertex="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=4;strokeWidth=2;strokeColor=#64748B;fillColor=none;dashed=1;dashPattern=8 6;" value="">
+      <mxGeometry x="30" y="236" width="840" height="326" as="geometry" />
+    </mxCell>
+    <mxCell id="processLabel" parent="1" vertex="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=13;fontStyle=1;fontColor=#475569;" value="Single Node.js process">
+      <mxGeometry x="46" y="246" width="320" height="20" as="geometry" />
+    </mxCell>
+    <mxCell id="clientBox" parent="1" vertex="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;strokeWidth=2;strokeColor=#94A3B8;fillColor=#F8FAFC;" value="">
+      <mxGeometry x="52" y="104" width="372" height="88" as="geometry" />
+    </mxCell>
+    <mxCell id="clientTitle" parent="1" vertex="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=15;fontStyle=1;fontColor=#0F172A;" value="DNS client">
+      <mxGeometry x="70" y="116" width="336" height="20" as="geometry" />
+    </mxCell>
+    <mxCell id="clientBody" parent="1" vertex="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;fontSize=12;fontColor=#475569;" value="Any resolver on the network&lt;br&gt;dig, Resolve-DnsName, OS stub resolver">
+      <mxGeometry x="70" y="138" width="336" height="40" as="geometry" />
+    </mxCell>
+    <mxCell id="browserBox" parent="1" vertex="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;strokeWidth=2;strokeColor=#94A3B8;fillColor=#F8FAFC;" value="">
+      <mxGeometry x="476" y="104" width="372" height="88" as="geometry" />
+    </mxCell>
+    <mxCell id="browserTitle" parent="1" vertex="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=15;fontStyle=1;fontColor=#0F172A;" value="Web browser">
+      <mxGeometry x="494" y="116" width="336" height="20" as="geometry" />
+    </mxCell>
+    <mxCell id="browserBody" parent="1" vertex="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;fontSize=12;fontColor=#475569;" value="Operator on the host machine&lt;br&gt;Opens the dashboard over loopback">
+      <mxGeometry x="494" y="138" width="336" height="40" as="geometry" />
+    </mxCell>
+    <mxCell id="udpBox" parent="1" vertex="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;strokeWidth=2;strokeColor=#2563EB;fillColor=#EFF6FF;" value="">
+      <mxGeometry x="52" y="282" width="372" height="92" as="geometry" />
+    </mxCell>
+    <mxCell id="udpTitle" parent="1" vertex="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=15;fontStyle=1;fontColor=#0F172A;" value="UDP socket, port 53">
+      <mxGeometry x="70" y="294" width="336" height="20" as="geometry" />
+    </mxCell>
+    <mxCell id="udpBody" parent="1" vertex="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;fontSize=12;fontColor=#475569;" value="node:dgram with dns-packet&lt;br&gt;Decodes the query and encodes the answer">
+      <mxGeometry x="70" y="316" width="336" height="46" as="geometry" />
+    </mxCell>
+    <mxCell id="dashBox" parent="1" vertex="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;strokeWidth=2;strokeColor=#7C3AED;fillColor=#F5F3FF;" value="">
+      <mxGeometry x="476" y="282" width="372" height="92" as="geometry" />
+    </mxCell>
+    <mxCell id="dashTitle" parent="1" vertex="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=15;fontStyle=1;fontColor=#0F172A;" value="Dashboard, port 8053">
+      <mxGeometry x="494" y="294" width="336" height="20" as="geometry" />
+    </mxCell>
+    <mxCell id="dashBody" parent="1" vertex="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;fontSize=12;fontColor=#475569;" value="Express 5, bound to loopback, no auth&lt;br&gt;Static UI plus a REST API">
+      <mxGeometry x="494" y="316" width="336" height="46" as="geometry" />
+    </mxCell>
+    <mxCell id="handlerBox" parent="1" vertex="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;strokeWidth=2;strokeColor=#0F766E;fillColor=#F0FDFA;" value="">
+      <mxGeometry x="52" y="430" width="372" height="92" as="geometry" />
+    </mxCell>
+    <mxCell id="handlerTitle" parent="1" vertex="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=15;fontStyle=1;fontColor=#0F172A;" value="Query handler">
+      <mxGeometry x="70" y="442" width="336" height="20" as="geometry" />
+    </mxCell>
+    <mxCell id="handlerBody" parent="1" vertex="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;fontSize=12;fontColor=#475569;" value="Four layer resolution&lt;br&gt;Stops at the first layer that answers">
+      <mxGeometry x="70" y="464" width="336" height="46" as="geometry" />
+    </mxCell>
+    <mxCell id="bl1Box" parent="1" vertex="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;strokeWidth=2;strokeColor=#DC2626;fillColor=#FEF2F2;" value="">
+      <mxGeometry x="52" y="606" width="372" height="104" as="geometry" />
+    </mxCell>
+    <mxCell id="bl1Title" parent="1" vertex="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=15;fontStyle=1;fontColor=#0F172A;" value="1. Blocklist">
+      <mxGeometry x="70" y="620" width="336" height="20" as="geometry" />
+    </mxCell>
+    <mxCell id="bl1Body" parent="1" vertex="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;fontSize=12;fontColor=#475569;" value="In-memory Set, O(1) lookup&lt;br&gt;A gives 0.0.0.0, AAAA gives ::, every&lt;br&gt;other type gives an empty answer">
+      <mxGeometry x="70" y="644" width="336" height="54" as="geometry" />
+    </mxCell>
+    <mxCell id="redisBox" parent="1" vertex="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;strokeWidth=2;strokeColor=#D97706;fillColor=#FFFBEB;" value="">
+      <mxGeometry x="52" y="754" width="372" height="104" as="geometry" />
+    </mxCell>
+    <mxCell id="redisTitle" parent="1" vertex="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=15;fontStyle=1;fontColor=#0F172A;" value="2. Redis cache">
+      <mxGeometry x="70" y="768" width="336" height="20" as="geometry" />
+    </mxCell>
+    <mxCell id="redisBody" parent="1" vertex="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;fontSize=12;fontColor=#475569;" value="RRsets keyed by name:type, follows CNAMEs&lt;br&gt;Upstream answers only, written back after&lt;br&gt;a reply and expiring on its TTL">
+      <mxGeometry x="70" y="792" width="336" height="54" as="geometry" />
+    </mxCell>
+    <mxCell id="mongoBox" parent="1" vertex="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;strokeWidth=2;strokeColor=#15803D;fillColor=#F0FDF4;" value="">
+      <mxGeometry x="52" y="902" width="372" height="104" as="geometry" />
+    </mxCell>
+    <mxCell id="mongoTitle" parent="1" vertex="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=15;fontStyle=1;fontColor=#0F172A;" value="3. MongoDB records">
+      <mxGeometry x="70" y="916" width="336" height="20" as="geometry" />
+    </mxCell>
+    <mxCell id="mongoBody" parent="1" vertex="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;fontSize=12;fontColor=#475569;" value="Source of truth, never cached&lt;br&gt;A, AAAA, CNAME, MX and TXT, with PTR&lt;br&gt;derived from your A records">
+      <mxGeometry x="70" y="940" width="336" height="54" as="geometry" />
+    </mxCell>
+    <mxCell id="upBox" parent="1" vertex="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;strokeWidth=2;strokeColor=#0369A1;fillColor=#F0F9FF;" value="">
+      <mxGeometry x="52" y="1050" width="372" height="104" as="geometry" />
+    </mxCell>
+    <mxCell id="upTitle" parent="1" vertex="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=15;fontStyle=1;fontColor=#0F172A;" value="4. Upstream DNS">
+      <mxGeometry x="70" y="1064" width="336" height="20" as="geometry" />
+    </mxCell>
+    <mxCell id="upBody" parent="1" vertex="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;fontSize=12;fontColor=#475569;" value="Cloudflare 1.1.1.1, then Google 8.8.8.8&lt;br&gt;The next resolver is tried after 2s&lt;br&gt;The reply is cached in Redis">
+      <mxGeometry x="70" y="1088" width="336" height="54" as="geometry" />
+    </mxCell>
+    <mxCell id="blDbBox" parent="1" vertex="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;strokeWidth=2;strokeColor=#DC2626;fillColor=#FEF2F2;dashed=1;" value="">
+      <mxGeometry x="476" y="606" width="372" height="104" as="geometry" />
+    </mxCell>
+    <mxCell id="blDbTitle" parent="1" vertex="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=15;fontStyle=1;fontColor=#0F172A;" value="MongoDB blocklist">
+      <mxGeometry x="494" y="620" width="336" height="20" as="geometry" />
+    </mxCell>
+    <mxCell id="blDbBody" parent="1" vertex="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;fontSize=12;fontColor=#475569;" value="Durable list of blocked names&lt;br&gt;Reloaded into the Set at startup and&lt;br&gt;after every edit, with no restart">
+      <mxGeometry x="494" y="644" width="336" height="54" as="geometry" />
+    </mxCell>
+    <mxCell id="footer" parent="1" vertex="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=12;fontColor=#64748B;" value="MongoDB and Redis stay internal to the Compose network. Only ports 53 and 8053 are published, and 8053 is bound to loopback.">
+      <mxGeometry x="52" y="1176" width="796" height="20" as="geometry" />
+    </mxCell>
+    <mxCell id="e1" parent="1" edge="1" source="clientBox" target="udpBox" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#2563EB;fontColor=#475569;fontSize=11;endArrow=block;endFill=1;exitX=0.35;exitY=1;exitDx=0;exitDy=0;entryX=0.35;entryY=0;entryDx=0;entryDy=0;" value="query">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="-24" y="-25" as="offset" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="e2" parent="1" edge="1" source="udpBox" target="clientBox" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#64748B;fontColor=#475569;fontSize=11;endArrow=block;endFill=1;dashed=1;exitX=0.72;exitY=0;exitDx=0;exitDy=0;entryX=0.72;entryY=1;entryDx=0;entryDy=0;" value="answer">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="28" y="-25" as="offset" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="e3" parent="1" edge="1" source="browserBox" target="dashBox" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#7C3AED;fontColor=#475569;fontSize=11;endArrow=block;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" value="HTTP">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="-26" y="-25" as="offset" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="e4" parent="1" edge="1" source="udpBox" target="handlerBox" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#0F766E;endArrow=block;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" value="">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="e5" parent="1" edge="1" source="handlerBox" target="bl1Box" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#475569;fontColor=#475569;fontSize=11;endArrow=block;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" value="resolves in order">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="66" y="22" as="offset" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="e6" parent="1" edge="1" source="bl1Box" target="redisBox" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#D97706;fontColor=#475569;fontSize=11;endArrow=block;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" value="not blocked">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="54" as="offset" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="e7" parent="1" edge="1" source="redisBox" target="mongoBox" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#15803D;fontColor=#475569;fontSize=11;endArrow=block;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" value="cache miss">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="50" as="offset" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="e8" parent="1" edge="1" source="mongoBox" target="upBox" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#0369A1;fontColor=#475569;fontSize=11;endArrow=block;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" value="no local record">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="62" as="offset" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="e9" parent="1" edge="1" source="blDbBox" target="bl1Box" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#DC2626;endArrow=block;endFill=1;dashed=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" value="">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="e10" parent="1" edge="1" source="dashBox" target="blDbBox" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#DC2626;fontColor=#475569;fontSize=11;endArrow=block;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" value="edit blocked names">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="74" as="offset" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="e11" parent="1" edge="1" source="dashBox" target="mongoBox" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#15803D;fontColor=#475569;fontSize=11;endArrow=block;endFill=1;exitX=1;exitY=0.7;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" value="edit records">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="874" y="346" />
+          <mxPoint x="874" y="954" />
+        </Array>
+        <mxPoint x="-52" as="offset" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="e12" parent="1" edge="1" source="upBox" target="redisBox" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#D97706;endArrow=block;endFill=1;dashed=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" value="">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="26" y="1102" />
+          <mxPoint x="26" y="806" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+  </root>
+</mxGraphModel></diagram>
+</mxfile>

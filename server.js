@@ -7,11 +7,13 @@ import { connectRedis } from './config/redis.js'
 import { loadBlockList } from './services/blocklistService.js'
 import { styleText } from 'node:util'
 import { createIndexes } from './config/indexes.js'
+import { startDashboard } from './dashboard/app.js'
 
 await connectDatabase()
 await connectRedis()
 await loadBlockList()
 await createIndexes()
+await startDashboard()
 
 // Map to store client info so we can route the upstream response back to them
 const pendingRequests = new Map()

@@ -6,7 +6,8 @@ const blockedDomains = new Set()
 
 /**
  * Loads blocked domains from MongoDB into memory for fast lookup
- * Should be called on server startup and when blocklist is updated
+ * Called on server startup and by the dashboard after every blocklist edit
+ * @returns {Promise<number>} Number of domains now loaded
  */
 const loadBlockList = async () => {
   const blockedCollection = getBlocklistCollection()
@@ -21,6 +22,7 @@ const loadBlockList = async () => {
   console.log(
     styleText('green', `Loaded ${blockedDomains.size} blocked domains`),
   )
+  return blockedDomains.size
 }
 
 /**
@@ -32,4 +34,12 @@ const isBlocked = (domain) => {
   return blockedDomains.has(domain)
 }
 
-export { loadBlockList, isBlocked }
+/**
+ * Returns how many domains are currently blocked in memory
+ * @returns {number} Size of the in-memory blocklist
+ */
+const getBlockedCount = () => {
+  return blockedDomains.size
+}
+
+export { loadBlockList, isBlocked, getBlockedCount }

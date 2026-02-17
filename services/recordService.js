@@ -31,11 +31,9 @@ const findRecord = async ({ name, type }) => {
     if (!result) return null
     // Return the domain name as the PTR record content
     return {
-      records: [
-        {
-          content: result.name,
-        },
-      ],
+      records: {
+        content: [result.name],
+      },
     }
   }
 
